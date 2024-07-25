@@ -1,12 +1,25 @@
 import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
 import { AppController } from './app.controller';
+import {ConfigModule, ConfigService} from '@nestjs/config';
 import { AppService } from './app.service';
 import {LoggerMiddleware} from "./middlewares/logger.middleware";
 
+// 외부에서 env불러들일 수 있음 보안안전
+const getEnv = async ()=>{
+  // const response = await axios.get('~');
+  // return response.data;
+  return{
+    DB_PASSWORD:'1111',
+    NAME:'ethan',
+  }
+}
+
 @Module({
-  imports: [],
+  // load -> getEnv 함수생성해서 사용
+  // imports: [ConfigModule.forRoot({isGlobal: true, load :[getEnv]}),],
+  imports: [ConfigModule.forRoot({isGlobal: true, load :[getEnv]}),],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,ConfigService],
 })
 export class AppModule implements NestModule{
   // 라우트 전체에 로거 적용
