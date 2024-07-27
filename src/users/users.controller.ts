@@ -1,10 +1,14 @@
-import {Body, Controller, Get, Post, Req} from '@nestjs/common';
+import {Body, Controller, Get, Post, Req, UseInterceptors} from '@nestjs/common';
 import { JoinRequestDto } from "./dto/join.request.dto";
 import {UsersService} from "./users.service";
 import {ApiOkResponse, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {UserDto} from "../common/dto/user.dto";
 import {User} from "../common/decorator/user.decorator";
+import {UndefinedToNullInterceptor} from "../common/interceptor/undefinedToNull.interceptor";
 
+// 개별로도 적용가능
+// 컨트롤러 리턴값이 undefined 일경우~ 인터셉트안에 로직을 따름
+@UseInterceptors(UndefinedToNullInterceptor)
 @ApiTags('USER')
 @Controller('api/users')
 export class UsersController {
