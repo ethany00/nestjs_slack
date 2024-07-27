@@ -33,7 +33,7 @@ export class UsersController {
     // 응답 늘려줄 수 있음
     @ApiResponse({
         status:500,
-        description:'서버 에러',
+        description:'서버 에러!',
     })
     @Post('login')
     logIn(@Req() req) {
