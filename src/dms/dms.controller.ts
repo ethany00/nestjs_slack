@@ -1,7 +1,36 @@
-import {Body, Controller, Get, Param, Post, Query, Res} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
+import {ApiParam, ApiQuery, ApiTags} from "@nestjs/swagger";
 
+// 그룹핑명
+@ApiTags('DM')
+// @ts-ignore
 @Controller('api/workspaces/:url/dms')
 export class DmsController {
+
+    @ApiParam({
+        name:'url',
+        required:true,
+        description:'워크스페이스 url',
+    })
+
+    @ApiParam({
+        name:'id',
+        required:true,
+        description:'사용자 id',
+    })
+
+    @ApiQuery({
+        name:'perPage',
+        required:true,
+        description:'한 번에 가져오는 개수',
+    })
+
+    @ApiQuery({
+        name:'page',
+        required:true,
+        description:'불러올 페이지',
+    })
+
     @Get(':id/chats')
     // 개별적으로 인자받기
     //getChats(@Query('perPage') perPage,@Query('page') page) {
