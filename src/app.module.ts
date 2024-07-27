@@ -6,6 +6,7 @@ import {LoggerMiddleware} from "./middlewares/logger.middleware";
 import { UsersModule } from './users/users.module';
 import { WorkspacesModule } from './workspaces/workspaces.module';
 import { ChannelsModule } from './channels/channels.module';
+import { DmsModule } from './dms/dms.module';
 
 // 외부에서 env불러들일 수 있음 보안안전
 const getEnv = async ()=>{
@@ -20,7 +21,7 @@ const getEnv = async ()=>{
 @Module({
   // load -> getEnv 함수생성해서 사용
   // imports: [ConfigModule.forRoot({isGlobal: true, load :[getEnv]}),],
-  imports: [ConfigModule.forRoot(), UsersModule, WorkspacesModule, ChannelsModule,],
+  imports: [ConfigModule.forRoot(), UsersModule, WorkspacesModule, ChannelsModule, DmsModule,],
   controllers: [AppController],
   providers: [AppService,ConfigService],
 })
