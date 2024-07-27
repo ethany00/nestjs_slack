@@ -3,6 +3,7 @@ import { JoinRequestDto } from "./dto/join.request.dto";
 import {UsersService} from "./users.service";
 import {ApiOkResponse, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {UserDto} from "../common/dto/user.dto";
+import {User} from "../common/decorator/user.decorator";
 
 @ApiTags('USER')
 @Controller('api/users')
@@ -15,8 +16,10 @@ export class UsersController {
     // 스웨거를 위한 설명
     @ApiOperation({summary:'내 정보 조회'})
     @Get()
-    getUsers(@Req() req) {
-        return req.user;
+    // 데코레이터 형식으로 변환
+    getUsers(@User() user) {
+        return user;
+        // res.locals.jwt
     }
     @ApiOperation({summary:'회원가입'})
     @Post()
@@ -36,8 +39,8 @@ export class UsersController {
         description:'서버 에러!',
     })
     @Post('login')
-    logIn(@Req() req) {
-        return req.user;
+    logIn(@User() user) {
+        return user;
     }
 
     @Post('logout')
