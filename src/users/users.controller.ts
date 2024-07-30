@@ -14,6 +14,8 @@ import {UndefinedToNullInterceptor} from "../common/interceptor/undefinedToNull.
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
+    // resource 명령어로 crud 한방에 처리가능 nest g resource
+
     @ApiResponse({
         type: UserDto
     })
