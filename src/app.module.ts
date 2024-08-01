@@ -42,7 +42,7 @@ const getEnv = async ()=>{
         // entities: ['entities/*.js'],
         // entities: [ChannelChats], 하나씩 넣어줘도 된다
         // 직접 엔티티를 만들고 싱크할때 true 이후 한번 생성된 후에는 false 처리로 해야 안전
-        synchronize: false,
+        synchronize: true,
         // typeorm 쿼리로깅 에러가 종종 있다
         logging:true,
         // 서버 재시작시에 typeorm 디비연결 끊어지지 않게 하기위해서 ( 핫리로딩을 위해 )
