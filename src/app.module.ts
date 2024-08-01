@@ -9,8 +9,14 @@ import { ChannelsModule } from './channels/channels.module';
 import { DmsModule } from './dms/dms.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import * as process from "node:process";
-import {ChannelChats} from "./entities/ChannelChats";
-import {Users} from "./entities/Users";
+import { ChannelChats } from './entities/ChannelChats';
+import { ChannelMembers } from './entities/ChannelMembers';
+import { Channels } from './entities/Channels';
+import { DMs } from './entities/DMs';
+import { Mentions } from './entities/Mentions';
+import { Users } from './entities/Users';
+import { WorkspaceMembers } from './entities/WorkspaceMembers';
+import { Workspaces } from './entities/Workspaces';
 
 // 외부에서 env불러들일 수 있음 보안안전
 const getEnv = async ()=>{
@@ -35,14 +41,23 @@ const getEnv = async ()=>{
         type: 'mysql',
         host: 'localhost',
         port: 3306,
-        username: process.env.DB_USER,
+        username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
-        autoLoadEntities:true, // forFeature 안에 읽어서 로드함 버그 있으면 아래 코드로..
+        // autoLoadEntities:true, // forFeature 안에 읽어서 로드함 버그 있으면 아래 코드로..
         // entities: ['entities/*.js'],
-        // entities: [ChannelChats], 하나씩 넣어줘도 된다
+          entities: [
+              ChannelChats,
+              ChannelMembers,
+              Channels,
+              DMs,
+              Mentions,
+              Users,
+              WorkspaceMembers,
+              Workspaces,
+          ],
         // 직접 엔티티를 만들고 싱크할때 true 이후 한번 생성된 후에는 false 처리로 해야 안전
-        synchronize: true,
+        synchronize: false,
         // typeorm 쿼리로깅 에러가 종종 있다
         logging:true,
         // 서버 재시작시에 typeorm 디비연결 끊어지지 않게 하기위해서 ( 핫리로딩을 위해 )
