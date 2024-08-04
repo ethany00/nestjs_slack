@@ -29,8 +29,9 @@ export class UsersController {
     }
     @ApiOperation({summary:'회원가입'})
     @Post()
-    postUser(@Body() data:JoinRequestDto) {
-        this.usersService.postUsers(data.email,data.nickname,data.password);
+    join(@Body() data:JoinRequestDto) {
+        this.usersService.join(data.email,data.nickname,data.password);
+        return undefined;
     }
 
     // @ApiOkResponse 알아서 200을 res
