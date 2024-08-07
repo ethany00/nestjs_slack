@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 
+// 인터셉터는 컨트롤러,서비스 앞뒤에서 실행되고 exceptionfilter는 무조건 컨트롤러 뒤에서 실행
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
     catch(exception: HttpException, host: ArgumentsHost) {
