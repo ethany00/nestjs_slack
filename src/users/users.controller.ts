@@ -29,9 +29,9 @@ export class UsersController {
     }
     @ApiOperation({summary:'회원가입'})
     @Post()
-    join(@Body() data:JoinRequestDto) {
-        this.usersService.join(data.email,data.nickname,data.password);
-        return undefined;
+    async join(@Body() data:JoinRequestDto) {
+        // await 을 붙여줌으로서 에러가 밖으로 배출
+        await this.usersService.join(data.email,data.nickname,data.password);
     }
 
     // @ApiOkResponse 알아서 200을 res
